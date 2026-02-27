@@ -42,5 +42,15 @@ gradlePlugin {
             id = "fr.acyll.convention.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+
+        register("cmpApplication") {
+            id = "fr.acyll.convention.cmp.application"
+            implementationClass = "CmpApplicationConventionPlugin"
+        }
+
+        register("kmpLibrary") {
+            id = "fr.acyll.convention.kmp.library"
+            implementationClass = "KmpLibraryConventionPlugin"
+        }
     }
 }
