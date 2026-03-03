@@ -8,14 +8,12 @@ group = "fr.acyll.convention.buildlogic"
 
 dependencies {
     compileOnly(libs.android.gradlePlugin)
-    implementation(libs.android.gradlePlugin)
     compileOnly(libs.android.tools.common)
-    implementation(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
-    implementation(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
-    implementation(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    implementation(libs.buildkonfig.gradlePlugin)
+    implementation(libs.buildkonfig.compiler)
 }
 
 java {
@@ -66,6 +64,11 @@ gradlePlugin {
         register("cmpFeature") {
             id = "fr.acyll.convention.cmp.feature"
             implementationClass = "CmpFeatureConventionPlugin"
+        }
+
+        register("buildKongif") {
+            id = "fr.acyll.convention.buildkonfig"
+            implementationClass = "BuildKonfigConventionPlugin"
         }
     }
 }
