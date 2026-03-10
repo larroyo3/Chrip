@@ -180,6 +180,8 @@ convention-kmp-library ={ id = "fr.acyll.convention.kmp.library", version = "uns
 convention-cmp-library = { id = "fr.acyll.convention.cmp.library", version = "unspecified" }
 convention-cmp-feature = { id = "fr.acyll.convention.cmp.feature", version = "unspecified" }
 convention-buildkonfig = { id = "fr.acyll.convention.buildkonfig", version = "unspecified" }
+convention-room = { id = "fr.acyll.convention.room", version = "unspecified" }
+
 # Android
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }

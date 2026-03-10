@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.androidx.room.gradle.plugin)
     implementation(libs.buildkonfig.gradlePlugin)
     implementation(libs.buildkonfig.compiler)
 }
@@ -69,6 +70,11 @@ gradlePlugin {
         register("buildKongif") {
             id = "fr.acyll.convention.buildkonfig"
             implementationClass = "BuildKonfigConventionPlugin"
+        }
+
+        register("room") {
+            id = "fr.acyll.convention.room"
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }
