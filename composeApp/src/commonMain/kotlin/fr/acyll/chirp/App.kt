@@ -18,11 +18,12 @@ import org.jetbrains.compose.resources.painterResource
 
 import chirp.composeapp.generated.resources.Res
 import chirp.composeapp.generated.resources.compose_multiplatform
+import fr.acyll.core.designsystem.theme.ChirpTheme
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    ChirpTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
