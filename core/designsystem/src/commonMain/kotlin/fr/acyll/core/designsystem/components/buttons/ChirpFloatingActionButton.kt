@@ -1,4 +1,4 @@
-package fr.acyll.core.designsystem.compontents.buttons
+package fr.acyll.core.designsystem.components.buttons
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
