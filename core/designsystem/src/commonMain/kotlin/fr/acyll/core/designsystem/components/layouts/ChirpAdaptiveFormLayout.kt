@@ -38,8 +38,8 @@ fun ChirpAdaptiveFormLayout(
     headerText: String,
     errorText: String? = null,
     logo: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     formContent: @Composable ColumnScope.() -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val configuration = currentDeviceConfiguration()
     val headerColor = if(configuration == DeviceConfiguration.MOBILE_LANDSCAPE) {
@@ -52,8 +52,8 @@ fun ChirpAdaptiveFormLayout(
         DeviceConfiguration.MOBILE_PORTRAIT -> {
             ChirpSurface(
                 modifier = modifier
-                    .consumeWindowInsets(WindowInsets.navigationBars)
-                    .consumeWindowInsets(WindowInsets.displayCutout),
+                    .consumeWindowInsets(WindowInsets.displayCutout)
+                    .consumeWindowInsets(WindowInsets.navigationBars),
                 header = {
                     Spacer(modifier = Modifier.height(32.dp))
                     logo()
@@ -76,6 +76,7 @@ fun ChirpAdaptiveFormLayout(
                 modifier = modifier
                     .fillMaxSize()
                     .consumeWindowInsets(WindowInsets.displayCutout)
+                    .consumeWindowInsets(WindowInsets.navigationBars)
             ) {
                 Column(
                     modifier = Modifier
@@ -87,7 +88,8 @@ fun ChirpAdaptiveFormLayout(
                     AuthHeaderSection(
                         headerText = headerText,
                         headerColor = headerColor,
-                        errorText = errorText
+                        errorText = errorText,
+                        headerTextAlignment = TextAlign.Start
                     )
                 }
 
@@ -95,7 +97,9 @@ fun ChirpAdaptiveFormLayout(
                     modifier = Modifier
                         .weight(1f)
                 ) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     formContent()
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
@@ -106,7 +110,7 @@ fun ChirpAdaptiveFormLayout(
                 modifier = modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(32.dp),
+                    .padding(top = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(32.dp)
             ) {
@@ -118,7 +122,6 @@ fun ChirpAdaptiveFormLayout(
                         .clip(RoundedCornerShape(32.dp))
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(horizontal = 24.dp, vertical = 32.dp),
-                    verticalArrangement = Arrangement.spacedBy(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     AuthHeaderSection(
@@ -138,13 +141,14 @@ fun ChirpAdaptiveFormLayout(
 fun ColumnScope.AuthHeaderSection(
     headerText: String,
     headerColor: Color,
-    errorText: String? = null
+    errorText: String? = null,
+    headerTextAlignment: TextAlign = TextAlign.Center
 ) {
     Text(
         text = headerText,
         style = MaterialTheme.typography.titleLarge,
         color = headerColor,
-        textAlign = TextAlign.Center,
+        textAlign = headerTextAlignment,
         modifier = Modifier.fillMaxWidth()
     )
     AnimatedVisibility(
@@ -155,7 +159,7 @@ fun ColumnScope.AuthHeaderSection(
                 text = errorText,
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
+                textAlign = headerTextAlignment,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -172,12 +176,12 @@ fun ChirpAdaptiveFormLayoutLightPreview() {
             logo = { ChirpBrandLogo() },
             formContent = {
                 Text(
-                    text = "Simple form title",
+                    text = "Sample form title",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = "Simple form title 2",
+                    text = "Sample form title 2",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
