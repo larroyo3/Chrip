@@ -1,0 +1,12 @@
+package fr.acyll.core.domain.auth
+
+import fr.acyll.core.domain.EmptyResult
+import fr.acyll.core.domain.util.DataError
+
+interface AuthService {
+    suspend fun register(
+        email: String,
+        username: String,
+        password: String
+    ): EmptyResult<DataError.Remote>
+}
