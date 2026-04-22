@@ -25,6 +25,8 @@ import fr.acyll.core.designsystem.theme.ChirpTheme
 @Preview
 fun App() {
     ChirpTheme {
-        RegisterRoot()
+        RegisterRoot(
+            onRegisterSuccess = {}
+        )
     }
 }
