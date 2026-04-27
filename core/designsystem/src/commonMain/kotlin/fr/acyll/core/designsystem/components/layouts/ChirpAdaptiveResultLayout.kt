@@ -28,7 +28,7 @@ import fr.acyll.core.presentation.util.DeviceConfiguration
 import fr.acyll.core.presentation.util.currentDeviceConfiguration
 
 @Composable
-fun ChirpAdaptativeLayout(
+fun ChirpAdaptiveLayout(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -84,7 +84,7 @@ fun ChirpAdaptativeLayout(
 @Preview
 fun ChirpAdaptativeLayoutPhonePortraitPreview() {
     ChirpTheme {
-        ChirpAdaptativeLayout(
+        ChirpAdaptiveLayout(
             modifier = Modifier
                 .fillMaxSize(),
             content = {

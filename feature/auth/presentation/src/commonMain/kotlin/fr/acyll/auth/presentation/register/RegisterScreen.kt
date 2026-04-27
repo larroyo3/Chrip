@@ -26,7 +26,6 @@ import chirp.feature.auth.presentation.generated.resources.welcome_to_chirp
 import fr.acyll.core.designsystem.components.brand.ChirpBrandLogo
 import fr.acyll.core.designsystem.components.buttons.ChirpButton
 import fr.acyll.core.designsystem.components.buttons.ChirpButtonStyle
-import fr.acyll.core.designsystem.components.layouts.ChirpAdaptativeLayout
 import fr.acyll.core.designsystem.components.layouts.ChirpAdaptiveFormLayout
 import fr.acyll.core.designsystem.components.layouts.ChirpSnackbarScaffold
 import fr.acyll.core.designsystem.components.textfields.ChirpPasswordTextField
