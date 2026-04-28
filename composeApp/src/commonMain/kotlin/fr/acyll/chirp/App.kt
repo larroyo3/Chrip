@@ -19,14 +19,13 @@ import org.jetbrains.compose.resources.painterResource
 import chirp.composeapp.generated.resources.Res
 import chirp.composeapp.generated.resources.compose_multiplatform
 import fr.acyll.auth.presentation.register.RegisterRoot
+import fr.acyll.chirp.navigation.NavigationRoot
 import fr.acyll.core.designsystem.theme.ChirpTheme
 
 @Composable
 @Preview
 fun App() {
     ChirpTheme {
-        RegisterRoot(
-            onRegisterSuccess = {}
-        )
+        NavigationRoot()
     }
 }

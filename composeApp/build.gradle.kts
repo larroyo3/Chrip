@@ -28,6 +28,8 @@ kotlin {
             implementation(projects.feature.chat.presentation)
             implementation(projects.feature.chat.database)
 
+            implementation(libs.jetbrains.compose.navigation)
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
