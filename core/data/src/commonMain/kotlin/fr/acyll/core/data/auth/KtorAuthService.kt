@@ -1,5 +1,6 @@
 package fr.acyll.core.data.auth
 
+import fr.acyll.core.data.dto.request.EmailRequest
 import fr.acyll.core.data.dto.request.RegisterRequest
 import fr.acyll.core.data.networking.post
 import fr.acyll.core.domain.EmptyResult
@@ -22,6 +23,15 @@ class KtorAuthService(
                 email = email,
                 username = username,
                 password = password
+            )
+        )
+    }
+
+    override suspend fun resendVerificationEmail(email: String): EmptyResult<DataError.Remote> {
+        return httpClient.post(
+            route = "/auth/resend-verification",
+            body = EmailRequest(
+                email
             )
         )
     }
