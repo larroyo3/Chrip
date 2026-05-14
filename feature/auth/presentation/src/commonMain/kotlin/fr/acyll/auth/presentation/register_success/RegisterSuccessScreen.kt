@@ -8,20 +8,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import chirp.feature.auth.presentation.generated.resources.Res
 import chirp.feature.auth.presentation.generated.resources.account_successfully_created
 import chirp.feature.auth.presentation.generated.resources.login
 import chirp.feature.auth.presentation.generated.resources.resend_verification_email
 import chirp.feature.auth.presentation.generated.resources.resent_verification_email
 import chirp.feature.auth.presentation.generated.resources.verification_email_sent_to_x
-import fr.acyll.core.designsystem.components.brand.ChirpBrandLogo
 import fr.acyll.core.designsystem.components.brand.ChirpSuccessIcon
 import fr.acyll.core.designsystem.components.buttons.ChirpButton
 import fr.acyll.core.designsystem.components.buttons.ChirpButtonStyle
-import fr.acyll.core.designsystem.components.buttons.ChirpPrimaryButtonPreview
 import fr.acyll.core.designsystem.components.layouts.ChirpAdaptiveLayout
-import fr.acyll.core.designsystem.components.layouts.ChirpSimpleSuccessLayout
+import fr.acyll.core.designsystem.components.layouts.ChirpSimpleResultLayout
 import fr.acyll.core.designsystem.components.layouts.ChirpSnackbarScaffold
 import fr.acyll.core.designsystem.theme.ChirpTheme
 import fr.acyll.core.presentation.util.ObserveAsEvents
@@ -67,7 +64,7 @@ fun RegisterSuccessScreen(
         snackbarHostState = snackbarHostState
     ) {
         ChirpAdaptiveLayout {
-            ChirpSimpleSuccessLayout(
+            ChirpSimpleResultLayout(
                 title = stringResource(Res.string.account_successfully_created),
                 description = stringResource(
                     Res.string.verification_email_sent_to_x,

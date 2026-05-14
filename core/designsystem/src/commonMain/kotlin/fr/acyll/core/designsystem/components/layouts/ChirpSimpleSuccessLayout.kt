@@ -1,13 +1,12 @@
 package fr.acyll.core.designsystem.components.layouts
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,10 +22,10 @@ import fr.acyll.core.designsystem.theme.ChirpTheme
 import fr.acyll.core.designsystem.theme.extended
 
 @Composable
-fun ChirpSimpleSuccessLayout(
+fun ChirpSimpleResultLayout(
     title: String,
     description: String,
-    icon: @Composable () -> Unit,
+    icon: @Composable ColumnScope.() -> Unit,
     primaryButton: @Composable () -> Unit,
     secondaryButton: @Composable (() -> Unit)? = null,
     secondaryError: String? = null,
@@ -88,9 +87,9 @@ fun ChirpSimpleSuccessLayout(
 @Preview(
     showBackground = true
 )
-fun ChirpSimpleSuccessLayoutPreview() {
+fun ChirpSimpleResultLayoutPreview() {
     ChirpTheme {
-        ChirpSimpleSuccessLayout(
+        ChirpSimpleResultLayout(
             title = "Hello world!",
             description = "Test description",
             icon = {
