@@ -36,10 +36,11 @@ import fr.acyll.core.designsystem.components.layouts.ChirpSimpleResultLayout
 import fr.acyll.core.designsystem.theme.ChirpTheme
 import fr.acyll.core.designsystem.theme.extended
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EmailVerificationRoot(
-    viewModel: EmailVerificationViewModel = viewModel()
+    viewModel: EmailVerificationViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

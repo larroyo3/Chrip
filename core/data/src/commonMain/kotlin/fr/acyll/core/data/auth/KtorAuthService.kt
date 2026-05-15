@@ -2,6 +2,7 @@ package fr.acyll.core.data.auth
 
 import fr.acyll.core.data.dto.request.EmailRequest
 import fr.acyll.core.data.dto.request.RegisterRequest
+import fr.acyll.core.data.networking.get
 import fr.acyll.core.data.networking.post
 import fr.acyll.core.domain.EmptyResult
 import fr.acyll.core.domain.auth.AuthService
@@ -33,6 +34,13 @@ class KtorAuthService(
             body = EmailRequest(
                 email
             )
+        )
+    }
+
+    override suspend fun verifyEmail(token: String): EmptyResult<DataError.Remote> {
+        return httpClient.get(
+            route = "auth/verify",
+            queryParams = mapOf("token" to token)
         )
     }
 }
