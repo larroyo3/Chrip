@@ -14,18 +14,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.resources.painterResource
 
 import chirp.composeapp.generated.resources.Res
 import chirp.composeapp.generated.resources.compose_multiplatform
 import fr.acyll.auth.presentation.register.RegisterRoot
+import fr.acyll.chirp.navigation.DeepLinkListener
 import fr.acyll.chirp.navigation.NavigationRoot
 import fr.acyll.core.designsystem.theme.ChirpTheme
 
 @Composable
 @Preview
 fun App() {
+    val navController = rememberNavController()
+    DeepLinkListener(navController)
+
     ChirpTheme {
-        NavigationRoot()
+        NavigationRoot(navController)
     }
 }
