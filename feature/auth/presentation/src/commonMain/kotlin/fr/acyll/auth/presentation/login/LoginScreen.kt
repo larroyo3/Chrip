@@ -32,6 +32,7 @@ import fr.acyll.core.designsystem.components.layouts.ChirpAdaptiveFormLayout
 import fr.acyll.core.designsystem.components.textfields.ChirpPasswordTextField
 import fr.acyll.core.designsystem.components.textfields.ChirpTextField
 import fr.acyll.core.designsystem.theme.ChirpTheme
+import fr.acyll.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -43,6 +44,12 @@ fun LoginRoot(
     onCreateAccount: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            LoginEvent.Success -> onLoginSuccess()
+        }
+    }
 
     LoginScreen(
         state = state,
@@ -83,7 +90,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(16.dp))
         ChirpPasswordTextField(
             title = stringResource(Res.string.password),
-            state = state.emailTextFieldState,
+            state = state.passwordTextFieldState,
             placeHolder = stringResource(Res.string.password),
             isPasswordVisible = state.isPasswordVisible,
             onToggleVisibilityClick = {
