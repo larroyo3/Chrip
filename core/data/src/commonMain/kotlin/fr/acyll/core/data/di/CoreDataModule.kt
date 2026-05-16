@@ -1,9 +1,11 @@
 package fr.acyll.core.data.di
 
+import fr.acyll.core.data.auth.DataStoreSessionStorage
 import fr.acyll.core.data.auth.KtorAuthService
 import fr.acyll.core.data.logging.KermitLogger
 import fr.acyll.core.data.networking.HttpClientFactory
 import fr.acyll.core.domain.auth.AuthService
+import fr.acyll.core.domain.auth.SessionStorage
 import fr.acyll.core.domain.logging.ChirpLogger
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -21,4 +23,5 @@ val coreDataModule = module {
     }
 
     singleOf(::KtorAuthService) bind AuthService::class
+    singleOf(::DataStoreSessionStorage) bind SessionStorage::class
 }
