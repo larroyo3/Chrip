@@ -19,7 +19,7 @@ val coreDataModule = module {
 
     single<ChirpLogger> { KermitLogger }
     single {
-        HttpClientFactory(get()).create(get())
+        HttpClientFactory(get(), get()).create(get())
     }
 
     singleOf(::KtorAuthService) bind AuthService::class
