@@ -1,6 +1,7 @@
 package fr.acyll.chirp.di
 
 import fr.acyll.auth.presentation.di.authPresentationModule
+import fr.acyll.chat.presentation.di.chatPresentationModule
 import fr.acyll.core.data.di.coreDataModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -11,7 +12,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         modules(
             coreDataModule,
             authPresentationModule,
-            appModule
+            appModule,
+            chatPresentationModule
         )
     }
 }

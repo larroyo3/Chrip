@@ -26,6 +26,8 @@ import fr.acyll.chat.presentation.chat_list.ChatListRoute
 import fr.acyll.chirp.navigation.DeepLinkListener
 import fr.acyll.chirp.navigation.NavigationRoot
 import fr.acyll.core.designsystem.theme.ChirpTheme
+import fr.acyll.core.presentation.util.ObserveAsEvents
+import org.jetbrains.compose.resources.Qualifier
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -44,6 +46,19 @@ fun App(
             onAuthenticationChecked()
         }
     }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            is MainEvent.OnSessionExpired -> {
+                navController.navigate(AuthGraphRoutes.Graph) {
+                    popUpTo(AuthGraphRoutes.Graph) {
+                        inclusive = false
+                    }
+                }
+            }
+        }
+    }
+
     ChirpTheme {
         if (!state.isCheckingAuth) {
             NavigationRoot(
