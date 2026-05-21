@@ -1,13 +1,28 @@
 package fr.acyll.auth.presentation.forgot_password
 
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import fr.acyll.auth.domain.EmailValidator
+import fr.acyll.core.domain.auth.AuthService
+import fr.acyll.core.domain.onFailure
+import fr.acyll.core.domain.onSuccess
+import fr.acyll.core.presentation.util.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class ForgotPasswordViewModel : ViewModel() {
+class ForgotPasswordViewModel(
+    private val authService: AuthService
+) : ViewModel() {
 
     private var hasLoadedInitialData = false
 
@@ -15,7 +30,7 @@ class ForgotPasswordViewModel : ViewModel() {
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
-                /** Load initial data here **/
+                observeValidationStates()
                 hasLoadedInitialData = true
             }
         }
@@ -25,9 +40,49 @@ class ForgotPasswordViewModel : ViewModel() {
             initialValue = ForgotPasswordState()
         )
 
+    private val isEmailValidFlow = snapshotFlow { state.value.emailTextFieldState.text.toString() }
+        .map { email -> EmailValidator.validate(email) }
+        .distinctUntilChanged()
+
+    private fun observeValidationStates() {
+        isEmailValidFlow.onEach { isEmailValid ->
+            _state.update { it.copy(canSubmit = isEmailValid) }
+        }.launchIn(viewModelScope)
+    }
+
     fun onAction(action: ForgotPasswordAction) {
         when (action) {
-            else -> TODO("Handle actions")
+            is ForgotPasswordAction.onSubmitClick -> submitForgotPasswordRequest()
+        }
+    }
+
+    private fun submitForgotPasswordRequest() {
+        if(state.value.isLoading || !state.value.canSubmit) {
+            return
+        }
+
+        viewModelScope.launch {
+            _state.update { it.copy(
+                isLoading = true,
+                isEmailSentSuccessfully = false,
+                errorText = null
+            ) }
+
+            val email = state.value.emailTextFieldState.text.toString()
+            authService
+                .forgotPassword(email)
+                .onSuccess {
+                    _state.update { it.copy(
+                        isLoading = false,
+                        isEmailSentSuccessfully = true
+                    ) }
+                }
+                .onFailure { error ->
+                    _state.update { it.copy(
+                        isLoading = false,
+                        errorText = error.toUiText()
+                    ) }
+                }
         }
     }
 
