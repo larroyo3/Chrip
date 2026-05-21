@@ -19,5 +19,8 @@ interface AuthGraphRoutes {
     data object ForgotPassword: AuthGraphRoutes
 
     @Serializable
+    data class ResetPassword(val token: String): AuthGraphRoutes
+
+    @Serializable
     data class EmailVerification(val token: String): AuthGraphRoutes
 }

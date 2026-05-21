@@ -4,6 +4,7 @@ import fr.acyll.core.data.dto.AuthInfoSerializable
 import fr.acyll.core.data.dto.request.EmailRequest
 import fr.acyll.core.data.dto.request.LoginRequest
 import fr.acyll.core.data.dto.request.RegisterRequest
+import fr.acyll.core.data.dto.request.ResetPasswordRequest
 import fr.acyll.core.data.mappers.toDomain
 import fr.acyll.core.data.networking.get
 import fr.acyll.core.data.networking.post
@@ -66,8 +67,21 @@ class KtorAuthService(
 
     override suspend fun forgotPassword(email: String): EmptyResult<DataError.Remote> {
         return httpClient.post<EmailRequest, Unit>(
-            route = "/auth/resend-verification",
+            route = "/auth/forgot-password",
             body = EmailRequest(email)
+        )
+    }
+
+    override suspend fun resetPassword(
+        newPassword: String,
+        token: String
+    ): EmptyResult<DataError.Remote> {
+        return httpClient.post(
+            route = "/auth/reset-password",
+            body = ResetPasswordRequest(
+                newPassword = newPassword,
+                token = token
+            )
         )
     }
 }

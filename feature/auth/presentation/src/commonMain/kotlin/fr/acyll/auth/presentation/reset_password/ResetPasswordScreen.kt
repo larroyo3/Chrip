@@ -28,10 +28,11 @@ import fr.acyll.core.designsystem.components.textfields.ChirpTextField
 import fr.acyll.core.designsystem.theme.ChirpTheme
 import fr.acyll.core.designsystem.theme.extended
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ResetPasswordRoot(
-    viewModel: ResetPasswordViewModel = viewModel()
+    viewModel: ResetPasswordViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
