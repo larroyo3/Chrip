@@ -31,6 +31,7 @@ import fr.acyll.core.designsystem.components.brand.ChirpBrandLogo
 import fr.acyll.core.designsystem.theme.ChirpTheme
 import fr.acyll.core.designsystem.theme.extended
 import fr.acyll.core.presentation.util.DeviceConfiguration
+import fr.acyll.core.presentation.util.clearFocusOnTap
 import fr.acyll.core.presentation.util.currentDeviceConfiguration
 
 @Composable
@@ -52,6 +53,7 @@ fun ChirpAdaptiveFormLayout(
         DeviceConfiguration.MOBILE_PORTRAIT -> {
             ChirpSurface(
                 modifier = modifier
+                    .clearFocusOnTap()
                     .consumeWindowInsets(WindowInsets.displayCutout)
                     .consumeWindowInsets(WindowInsets.navigationBars),
                 header = {
