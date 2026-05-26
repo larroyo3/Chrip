@@ -41,11 +41,3 @@ fun ChirpBottomSheet(
         content()
     }
 }
-
-@Composable
-@Preview
-fun ChirpBottomSheetPreview() {
-    ChirpTheme {
-        ChirpBottomSheet()
-    }
-}
